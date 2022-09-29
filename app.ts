@@ -37,5 +37,5 @@ const errorCatcher: ErrorRequestHandler = (err, req, res) => {
 };
 app.use(errorCatcher);
 
-app.listen(process.env.PORT);
-console.log('PORT', process.env.PORT);
+app.listen(process.env.PORT || 80);
+console.log('PORT', process.env.PORT || 80);
