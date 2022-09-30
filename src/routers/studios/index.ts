@@ -11,21 +11,21 @@ import { filterStudios } from '../../models/Studio/StudioUtils';
 const router = express.Router();
 
 /* Get a list of all studios */
-// router.get('/studios', Auth.Employee, Auth.Finally, async (req: Request, res: Response) => {
-//     try {
-//         return res.status(200).send({ success: true, ...(await filterStudios(req)) });
-//     } catch (error) {
-//         Auth.ErrorHandler(req, res, error);
-//     }
-// });
-
 router.get('/studios', Auth.Employee, Auth.Finally, async (req: Request, res: Response) => {
     try {
-        return res.status(200).send({ success: true, studios: Studio.find({ _id: { $in: req.user?.studios } }) });
+        return res.status(200).send({ success: true, ...(await filterStudios(req)) });
     } catch (error) {
         Auth.ErrorHandler(req, res, error);
     }
 });
+
+// router.get('/studios', Auth.Employee, Auth.Finally, async (req: Request, res: Response) => {
+//     try {
+//         return res.status(200).send({ success: true, studios: Studio.find({ _id: { $in: req.user?.studios } }) });
+//     } catch (error) {
+//         Auth.ErrorHandler(req, res, error);
+//     }
+// });
 
 /* Create a studio */
 router.post('/studio', Auth.Root, Auth.Finally, async (req: Request, res: Response) => {

@@ -4,6 +4,7 @@ import { IStudio, StudioModel } from './types';
 export default function (ServiceSchema: Schema<IStudio, StudioModel>) {
     ServiceSchema.statics.AggregateProject = function (params) {
         return {
+            _id: 1,
             name: 1,
             users: 1,
             owner: 1,
