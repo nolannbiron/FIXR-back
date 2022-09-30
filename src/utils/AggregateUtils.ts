@@ -1,5 +1,8 @@
 import mongoose, { PipelineStage } from 'mongoose';
-import { isDate } from './ObjectUtils';
+
+function isDate(date: Date) {
+    return date instanceof Date && !isNaN(date.getTime());
+}
 
 function capitalize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
