@@ -1,5 +1,5 @@
 {
     "version": 2,
-    "builds": [{ "src": "app.ts", "use": "@now/node" }],
-    "routes": [{ "src": "(.*)", "dest": "app.ts" }]
+    "buildCommand": "npm run build",
+    "devCommand": "npm run start"
 }
