@@ -1,5 +1,7 @@
 {
     "version": 2,
     "buildCommand": "npm run build",
-    "devCommand": "npm run start"
+    "outputDirectory": "dist",
+    "builds": [{ "src": "app.js", "use": "@now/node" }],
+    "routes": [{ "src": "/(.*)", "dest": "app.js" }]
 }
