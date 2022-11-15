@@ -4,7 +4,7 @@ import ModelUtils from '../../utils/ModelsUtils';
 import Service from '../../models/Service/Service';
 import { Request } from '../../common';
 import { filterServices } from '../../models/Service/ServiceUtils';
-import uploadFilesMiddleware from '../../middleware/upload';
+import { uploadFilesMiddleware } from '../../middleware/upload';
 import { ObjectId } from 'mongodb';
 import { getBucket } from '../../utils/Bucket';
 

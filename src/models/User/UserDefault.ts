@@ -72,8 +72,6 @@ export default function (UserSchema: Schema<IUser, UserModel>) {
     UserSchema.methods.edit = async function (req: Request) {
         const { firstName, lastName, email, username, password, phone, comment } = req.body as Partial<IUser>;
 
-        console.log(req);
-
         const user = this;
 
         user.editValue(req, firstName, 'firstName');

@@ -80,7 +80,7 @@ class AggregateUtils {
         if (!Array.isArray(this._aggregateSearch)) this._aggregateSearch = [];
         //this._lookupSearchValue = this.lookupContains(db.AggregateSearch()); // not used for now
         // need to be a list of search values : where the db is going to search for the value searchValue
-        console.log(this._aggregateSearch);
+        // console.log(this._aggregateSearch);
         this._lookupsortField = this.lookupContains(this._sortField);
     }
 
@@ -131,7 +131,7 @@ class AggregateUtils {
         const promises = [];
         if (this._aggregateType === 'both' || this._aggregateType === 'main') promises.push(this._db.aggregate(this._aggregate).collation({ locale: 'en_US', numericOrdering: true }));
         if (this._aggregateType === 'both' || this._aggregateType === 'count') promises.push(this._db.aggregate(this._count).collation({ locale: 'en_US', numericOrdering: true }));
-        console.log(this);
+        // console.log(this);
         this._result = await Promise.all(promises);
 
         if (!Array.isArray(this._result) || this._result.length < promises.length) throw { success: false, message: 'Invalid aggregate' };

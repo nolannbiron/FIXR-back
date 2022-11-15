@@ -13,6 +13,7 @@ export default function (ServiceSchema: Schema<IStudio, StudioModel>) {
             userToken: 1,
             createdAt: 1,
             updatedAt: 1,
+            settings: 1,
         };
     };
     ServiceSchema.statics.HideFields = function () {

@@ -7,6 +7,7 @@ import Studio from '../../models/Studio/Studio';
 import jwt from 'jsonwebtoken';
 import { Request } from '../../common';
 import { filterStudios } from '../../models/Studio/StudioUtils';
+import { uploadPicturesMiddleware } from '../../middleware/upload';
 
 const router = express.Router();
 
@@ -18,14 +19,6 @@ router.get('/studios', Auth.Employee, Auth.Finally, async (req: Request, res: Re
         Auth.ErrorHandler(req, res, error);
     }
 });
-
-// router.get('/studios', Auth.Employee, Auth.Finally, async (req: Request, res: Response) => {
-//     try {
-//         return res.status(200).send({ success: true, studios: Studio.find({ _id: { $in: req.user?.studios } }) });
-//     } catch (error) {
-//         Auth.ErrorHandler(req, res, error);
-//     }
-// });
 
 /* Create a studio */
 router.post('/studio', Auth.Root, Auth.Finally, async (req: Request, res: Response) => {
@@ -79,13 +72,12 @@ router.get('/studio/token/:registerToken', async (req: Request, res: Response) =
 });
 
 /* Edit a studio */
-router.patch('/studio/:studioId', Auth.Admin, Auth.Finally, async (req: Request, res: Response) => {
+router.patch('/studio/:studioId', Auth.Admin, Auth.Finally, uploadPicturesMiddleware, async (req: Request, res: Response) => {
     try {
         const { studioId } = req.params;
         ModelUtils.ValidId({ studioId });
 
         const studio = await Studio.findOne({ _id: studioId });
-        console.log(req.user, studio);
         if (!studio) throw { message: 'Unable to find studio' };
         if (!ModelUtils.canAccessDocument(req.user, studio)) throw { message: 'You are not allowed to access this studio' };
 
@@ -128,6 +120,23 @@ router.delete('/studio/:studioId', Auth.Root, Auth.Finally, async (req: Request,
         if (!studio) throw { message: 'Unable to find studio' };
 
         await studio.delete(req);
+
+        return res.status(200).send({ success: true });
+    } catch (error) {
+        Auth.ErrorHandler(req, res, error);
+    }
+});
+
+/* Delete a studio */
+router.delete('/studio/:studioId/picture/:pictureId', Auth.Root, Auth.Finally, async (req: Request, res: Response) => {
+    try {
+        const { studioId, pictureId } = req.params;
+        ModelUtils.ValidId({ studioId });
+
+        const studio = await Studio.findOne({ _id: studioId });
+        if (!studio) throw { message: 'Unable to find studio' };
+
+        await studio.deletePicture(req, pictureId);
 
         return res.status(200).send({ success: true });
     } catch (error) {

@@ -1,4 +1,6 @@
 import { Schema } from 'mongoose';
+import Pictures from '../others/Pictures/Pictures';
+import StudioSettings from '../others/StudioSettings/StudioSettings';
 
 export default {
     users: {
@@ -18,8 +20,21 @@ export default {
         type: String,
         required: true,
     },
+    description: {
+        type: String,
+        default: '',
+    },
     phone: {
         type: String,
+    },
+    settings: {
+        type: StudioSettings.schema,
+        default: {},
+    },
+    pictures: {
+        type: [Pictures.schema],
+        ref: 'pictures',
+        default: [],
     },
     adminToken: {
         type: String,

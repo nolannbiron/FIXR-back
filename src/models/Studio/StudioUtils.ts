@@ -19,7 +19,10 @@ export default function (StudioSchema: Schema<IStudio, StudioModel>) {
     StudioSchema.methods.generateJSON = async function (req: Request) {
         const studio = this;
 
+        console.log({ studio });
+
         const ret = await studio.generateJSON_(req);
+        console.log({ ret });
         return ret;
     };
 

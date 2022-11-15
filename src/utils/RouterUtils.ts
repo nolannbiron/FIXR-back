@@ -43,7 +43,7 @@ const createQueryStudios = (req: any, opts: any) => {
     return defaultQuery;
 };
 
-const createQuerySelfStudios = (user: IUser, opts?: any) => {
+const createQuerySelfStudios = (user: IUser) => {
     if (!user) throw { success: false, message: 'Invalid user' };
     return { $in: user.studios.map((id) => (typeof id === 'string' ? new mongoose.Types.ObjectId(id) : id)) };
 };

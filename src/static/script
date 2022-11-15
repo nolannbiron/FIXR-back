@@ -1,0 +1,13 @@
+#! /bin/bash
+_host="cluster0.jcczk.mongodb.net"
+_username="nolann"
+_password="Pullin98"
+_db="fixr"
+while read -r line; do
+    file=$(echo "$line" | awk -F'\t' '{ print $1 }')
+    [[ $file == 'connected to'* ]] && continue
+    directory=${file%/*}
+    mkdir -p $directory
+    mongofiles -h $_host -u $_username -p $_password -db $_db --authenticationDatabase=$external --authenticationMechanism=MONGODB-AWS get $file
+
+done < <(mongofiles -h $_host -u $_username -p $_password --authenticationDatabase=$external -db $_db --authenticationMechanism=MONGODB-AWS list)
