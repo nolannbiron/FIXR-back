@@ -1,4 +1,4 @@
-import { s3 } from '@/utils/Bucket';
+import { s3 } from '../../utils/Bucket';
 import mongoose, { ObjectId, Schema } from 'mongoose';
 import { Request } from '../../common';
 import ModelUtils from '../../utils/ModelsUtils';
