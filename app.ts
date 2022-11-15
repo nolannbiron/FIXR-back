@@ -37,5 +37,5 @@ const errorCatcher: ErrorRequestHandler = (err, req, res) => {
 };
 app.use(errorCatcher);
 
-app.listen(isDevMode ? process.env.PORT : 80);
+app.listen(process.env.PORT || 80);
 console.log('PORT', isDevMode ? process.env.PORT : 80);
