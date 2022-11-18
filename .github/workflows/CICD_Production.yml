@@ -1,4 +1,4 @@
-name: FIXR CICD DEV
+name: FIXR CICD PROD
 
 on:
     push:
