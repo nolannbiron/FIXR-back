@@ -15,7 +15,7 @@ aws.config.update({
     region: 'eu-west-3', // region of your bucket
 });
 
-export const s3 = new S3Client({ region: 'eu-west-3', credentials: { accessKeyId: process.env.S3_ACCESS_KEY, secretAccessKey: process.env.S3_SECRET } });
+export const s3 = new S3Client({ region: 'eu-west-3', credentials: { accessKeyId: process.env.S3_ACCESS_KEY ?? '', secretAccessKey: process.env.S3_SECRET ?? '' } });
 
 export const getBucket = (bucketName: string) => {
     const client = new MongoClient(database.fullUrl ?? '');

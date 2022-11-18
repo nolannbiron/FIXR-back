@@ -1,23 +1,24 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "esnext",
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "outDir": "dist",
-        "allowJs": true,
+        "target": "ESNext",
+        "useDefineForClassFields": true,
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "allowJs": false,
+        "skipLibCheck": true,
         "esModuleInterop": true,
-        "lib": ["dom", "es6"],
-        "baseUrl": "./src",
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "isolatedModules": false,
+        "outDir": "dist",
         "noEmit": false,
-        "paths": {
-            "@/*": ["./*"]
-        }
+        "typeRoots": [
+            "node_modules/@types" //this where npm packages containing types are located
+        ]
     },
-    "ts-node": {
-        "require": ["tsconfig-paths/register"]
-    },
-    "exclude": ["node_modules", "dist"],
-    "include": ["./src/", "./src/**/*"],
-    "files": ["./app.ts"]
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
 }

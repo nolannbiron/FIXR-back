@@ -78,7 +78,7 @@ export default function (StudioSchema: Schema<IStudio, StudioModel>) {
     StudioSchema.methods.deletePicture = async function (req: Request, pictureId: string) {
         const studio = this;
 
-        const picture = studio.pictures.find((picture) => picture._id.toString() === pictureId);
+        const picture = studio.pictures.find((picture: any) => picture._id.toString() === pictureId);
 
         const bucketParams = {
             Bucket: 'studios.pictures',
