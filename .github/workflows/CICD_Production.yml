@@ -33,6 +33,6 @@ jobs:
               run: |
                   echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
                   ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} "rm -rf /home/ubuntu/fixr-back/dist"
-                  scp -o StrictHostKeyChecking=no -i private_key -r dist ${USER_NAME}@${HOSTNAME}:/home/ubuntu/fixr-back
                   scp -o StrictHostKeyChecking=no -i private_key ./package.json ./package-lock.json ./ecosystem.config.js ${USER_NAME}@${HOSTNAME}:/home/ubuntu/fixr-back
+                  scp -o StrictHostKeyChecking=no -i private_key -r dist ${USER_NAME}@${HOSTNAME}:/home/ubuntu/fixr-back
                   ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} "cd /home/ubuntu/fixr-back && npm install && pm2 restart ecosystem.config.js"

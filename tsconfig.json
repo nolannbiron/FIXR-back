@@ -19,6 +19,6 @@
             "node_modules/@types" //this where npm packages containing types are located
         ]
     },
-    "include": ["src"],
+    "include": ["./src", "app.ts"],
     "exclude": ["node_modules", "dist"]
 }
