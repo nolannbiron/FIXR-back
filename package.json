@@ -8,7 +8,7 @@
         "start": "node dist/app.js",
         "test": "jest",
         "build": "tsc",
-        "pm2script": "ts-node app.ts"
+        "pm2script": "node dist/app.js"
     },
     "author": "",
     "license": "ISC",
