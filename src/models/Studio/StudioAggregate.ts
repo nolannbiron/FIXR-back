@@ -2,7 +2,7 @@ import { Schema } from 'mongoose';
 import { IStudio, StudioModel } from './types';
 
 export default function (ServiceSchema: Schema<IStudio, StudioModel>) {
-    ServiceSchema.statics.AggregateProject = function (params) {
+    ServiceSchema.statics.AggregateProject = function () {
         return {
             _id: 1,
             name: 1,
@@ -14,6 +14,7 @@ export default function (ServiceSchema: Schema<IStudio, StudioModel>) {
             createdAt: 1,
             updatedAt: 1,
             settings: 1,
+            address: 1,
         };
     };
     ServiceSchema.statics.HideFields = function () {

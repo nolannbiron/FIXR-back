@@ -1,6 +1,8 @@
 import { Model, ObjectId } from 'mongoose';
 import { Request } from '../../common';
+import { IAddress } from '../others/Address/types';
 import { IPicture } from '../others/Pictures/types';
+import { IStudioDetails } from '../others/StudioDetails/types';
 
 export interface IStudio {
     _id: string;
@@ -13,6 +15,8 @@ export interface IStudio {
     createdAt: Date;
     updatedAt: Date;
     pictures: IPicture[];
+    address: IAddress;
+    studioDetails: IStudioDetails;
 }
 
 export interface StudioMethods {

@@ -3,7 +3,7 @@ import model from './model';
 import { IStudioSettings } from './types';
 import GlobalUtils from '../../../utils/GlobalUtils';
 
-const schema = new Schema<IStudioSettings>(model, { timestamps: true, autoCreate: false });
+const schema = new Schema<IStudioSettings>(model, { _id: false, autoCreate: false });
 
 GlobalUtils(schema);
 

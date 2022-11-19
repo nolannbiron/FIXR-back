@@ -1,5 +1,7 @@
 import { Schema } from 'mongoose';
+import Address from '../others/Address/Address';
 import Pictures from '../others/Pictures/Pictures';
+import StudioDetails from '../others/StudioDetails/StudioDetails';
 import StudioSettings from '../others/StudioSettings/StudioSettings';
 
 export default {
@@ -41,5 +43,13 @@ export default {
     },
     userToken: {
         type: String,
+    },
+    address: {
+        type: Address.schema,
+        default: {},
+    },
+    details: {
+        type: StudioDetails.schema,
+        default: {},
     },
 };
