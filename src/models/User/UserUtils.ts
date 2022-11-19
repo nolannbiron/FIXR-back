@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import 'dotenv/config';
 import { Schema } from 'mongoose';
 import { IUser, UserModel } from './types';
 import { createQueryStudios } from '../../utils/RouterUtils';

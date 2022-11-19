@@ -1,9 +1,6 @@
 import { IUser, UserModel } from './../models/User/types';
-import 'dotenv/config';
-console.log('ENV', process.env.NODE_ENV);
 import { faker } from '@faker-js/faker';
-
-import mongoose, { model } from 'mongoose';
+import mongoose from 'mongoose';
 import databaseConfig from '../config/database';
 import User from '../models/User/User';
 import LocalCopy from '../models/LocalCopy/LocalCopy';
@@ -60,4 +57,4 @@ const updateLocalCopy = async () => {
 };
 
 // init();
-updateLocalCopy();
+// updateLocalCopy();

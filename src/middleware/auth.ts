@@ -1,8 +1,6 @@
 import { IUser } from './../models/User/types';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
-
-import 'dotenv/config';
 import { Request } from '../common';
 import { Response } from 'express';
 import { isEq } from '../utils/ModelsUtils';

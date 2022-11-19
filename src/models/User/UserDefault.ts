@@ -4,7 +4,6 @@ import ModelUtils from '../../utils/ModelsUtils';
 import bcrypt from 'bcryptjs';
 import { Request } from '../../common';
 import User from './User';
-import 'dotenv/config';
 import LocalCopy from '../LocalCopy/LocalCopy';
 
 const capitalize = (s: string) => {

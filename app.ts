@@ -1,13 +1,12 @@
-import 'dotenv/config';
-console.log('ENV', process.env.NODE_ENV);
+import dotenv from 'dotenv';
+dotenv.config();
 import express, { ErrorRequestHandler } from 'express';
 const app = express();
 import cors from 'cors';
-app.use(cors({ origin: true, credentials: true }));
-
 import mongoose from 'mongoose';
 import databaseConfig from './src/config/database';
 import routes from './src/routers';
+
 const isDevMode = process.env.NODE_ENV === 'development';
 mongoose.connect(
     (isDevMode ? databaseConfig.dev.url : databaseConfig.prod.url) ?? '',
@@ -19,6 +18,8 @@ mongoose.connect(
         if (err) console.error('mongoose.connect error: ', err);
     },
 );
+
+app.use(cors({ origin: true, credentials: true }));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -37,5 +38,5 @@ const errorCatcher: ErrorRequestHandler = (err, req, res) => {
 };
 app.use(errorCatcher);
 
-app.listen(process.env.PORT || 80);
-console.log('PORT', isDevMode ? process.env.PORT : 80);
+app.listen(process.env.PORT ?? 80);
+console.log('PORT', process.env.PORT ?? 80);

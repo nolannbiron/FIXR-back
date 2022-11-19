@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 export default {
     dev: {
         url: process.env.DB_URL_DEV,

@@ -1,5 +1,4 @@
 import sgMail from '@sendgrid/mail';
-import 'dotenv/config';
 
 export const confirmAuthEmail = async (email?: string, password?: string) => {
     if (!process.env.SENDGRID_API_KEY) return;
