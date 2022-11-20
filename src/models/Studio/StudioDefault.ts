@@ -58,7 +58,7 @@ export default function (StudioSchema: Schema<IStudio, StudioModel>) {
 
     /** ----------------------- Edit ----------------------- */
     StudioSchema.methods.edit = async function (req: Request) {
-        const { name, phone, owner, description, settings, address, details } = req.body;
+        const { name, phone, owner, description, settings, address } = req.body;
         const studio = this;
         console.log('edit studio', req.body);
         studio.editValue(req, name, 'name');
@@ -69,9 +69,9 @@ export default function (StudioSchema: Schema<IStudio, StudioModel>) {
         if (address) {
             studio.address.edit(req);
         }
-        if (details) {
-            studio.details.edit(req);
-        }
+        // if (details) {
+        //     studio.details.edit(req);
+        // }
         if (req.files) {
             const ids = (req.files as Array<Express.Multer.File & { id: ObjectId; location: string; key: string }>).map(function (file) {
                 return { url: file.location, key: file.key };

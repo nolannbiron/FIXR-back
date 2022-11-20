@@ -18,7 +18,7 @@ export default function (StudioDetailsSchema: Schema<IStudioDetails, StudioDetai
         const studioDetails = this;
         const { rules, extras } = req.body.details;
 
-        studioDetails.rules = rules;
+        studioDetails.rules.edit(rules);
         studioDetails.extras = extras;
     };
 }

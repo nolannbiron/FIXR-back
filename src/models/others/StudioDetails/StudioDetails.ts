@@ -4,7 +4,7 @@ import { StudioDetailsModel, StudioDetailsMethods, IStudioDetails } from './type
 import GlobalUtils from '../../../utils/GlobalUtils';
 import StudioDetailsDefault from './StudioDetailsDefault';
 
-const schema = new Schema<IStudioDetails, StudioDetailsModel, StudioDetailsMethods>(model, { autoCreate: false, _id: false });
+const schema = new Schema<IStudioDetails, StudioDetailsModel, StudioDetailsMethods>(model, { autoCreate: false, id: false });
 
 GlobalUtils(schema);
 StudioDetailsDefault(schema);

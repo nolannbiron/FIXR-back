@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 import Address from '../others/Address/Address';
+import Details from '../others/Details/Details';
 import Pictures from '../others/Pictures/Pictures';
-import StudioDetails from '../others/StudioDetails/StudioDetails';
 import StudioSettings from '../others/StudioSettings/StudioSettings';
 
 export default {
@@ -49,7 +49,13 @@ export default {
         default: {},
     },
     details: {
-        type: StudioDetails.schema,
-        default: {},
+        rules: {
+            type: [Details.schema],
+            default: [],
+        },
+        extras: {
+            type: [Details.schema],
+            default: [],
+        },
     },
 };

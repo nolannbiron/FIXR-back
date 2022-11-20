@@ -44,6 +44,8 @@ export const canAccessDocument = (mainDocument?: Type, document?: Type) => {
     if (!mainDocument) return false;
     if (!document) return false;
 
+    console.log(mainDocument);
+
     if (isUserModel(mainDocument)) {
         if (mainDocument.profile.permissionLevel === 0) return true;
         if (isServiceModel(document) && mainDocument.profile.permissionLevel === 3) isEq(mainDocument._id, document.artist);
@@ -54,6 +56,23 @@ export const canAccessDocument = (mainDocument?: Type, document?: Type) => {
     } else if (isStudioModel(mainDocument)) return isEq(mainDocument._id, value);
     else if (isServiceModel(mainDocument)) return isEq(mainDocument.studio, value);
     else return Array.isArray(value) ? value.some((id) => isEq(mainDocument.studio, id)) : isEq(mainDocument.studio, value);
+};
+
+export const routerArrayCanAccessDocument = (mainDocument: Type, document: Type) => {
+    const values = getDocumentValue(document);
+
+    if (isUserModel(mainDocument)) {
+        if (mainDocument.profile.permissionLevel === 0) return true;
+        if (isUserModel(document) && document.profile.permissionLevel === 0 && Array.isArray(document.studios) && document.studios.length === 0)
+            return true; /** lvl 1 & 2 user can access data of lvl 0 user */
+        return mainDocument.studios.some((elem) => (Array.isArray(values) ? values.some((id) => isEq(elem, id)) : false));
+    } else if (isStudioModel(mainDocument)) {
+        return Array.isArray(values) ? values.some((id) => isEq(mainDocument._id, id)) : false;
+    } else if (mainDocument.constructor().modelName === 'agencyGroup') {
+        return true;
+    } else {
+        return Array.isArray(values) ? values.some((id) => isEq(mainDocument.studio, id)) : false;
+    }
 };
 
 const createHandler = async function <T>(data: Document<unknown, any, T>) {

@@ -1,10 +1,12 @@
+import Details from '../Details/Details';
+
 export default {
     rules: {
-        type: [String],
+        type: [Details.schema],
         default: [],
     },
     extras: {
-        type: [String],
+        type: [Details.schema],
         default: [],
     },
 };

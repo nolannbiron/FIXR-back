@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken';
 import { Request } from '../../common';
 import { filterStudios } from '../../models/Studio/StudioUtils';
 import { uploadPicturesMiddleware } from '../../middleware/upload';
+import RouterArray from '../../utils/RouterArray';
 
 const router = express.Router();
 
@@ -165,5 +166,19 @@ router.delete('/studio/:studioId/picture/:pictureId', Auth.Root, Auth.Finally, a
 //     main: { name: 'studio' },
 //     element: { name: 'contact', arrayPath: 'contacts' },
 // })
+
+RouterArray(router, 'AddModel', {
+    main: { name: 'studio' },
+    element: { routeAs: 'rules', name: 'details', arrayPath: 'details.rules' },
+    auth: { add: Auth.Admin, delete: Auth.Admin },
+    methods: ['PATCH', 'GET', 'POST', 'DELETE'],
+});
+
+RouterArray(router, 'AddModel', {
+    main: { name: 'studio' },
+    element: { routeAs: 'extras', name: 'details', arrayPath: 'details.extras' },
+    auth: { add: Auth.Admin, delete: Auth.Admin },
+    methods: ['PATCH', 'GET', 'POST', 'DELETE'],
+});
 
 export default router;

@@ -1,3 +1,8 @@
+import { Document, Model, Types } from 'mongoose';
+import { IService, ServiceMethods } from '../models/Service/types';
+import { IServiceTemplate, ServiceTemplateMethods } from '../models/ServiceTemplate/types';
+import { IStudio, StudioMethods } from '../models/Studio/types';
+import { IUser, UserMethods } from '../models/User/types';
 import ModelUtils from './ModelsUtils';
 
 const findByString = function (obj: Record<string, any>, str: string) {
@@ -40,12 +45,18 @@ function generateAuthCode(min = 100000, max = 999999) {
 //     return properties.reduce((prev, curr) => prev && prev[curr], data)
 // }
 
-function addArray(array: any[], arrayElement: Record<string, any>, document: any, opts = { fullElement: false }) {
-    if (!arrayElement || !arrayElement._id) throw { success: false, message: 'Invalid ' + document.constructor.modelName };
+type Type =
+    | (Document<unknown, any, IUser> & IUser & Required<{ _id: string | Types.ObjectId }> & UserMethods)
+    | (Document<unknown, any, IStudio> & IStudio & Required<{ _id: string | Types.ObjectId }> & StudioMethods)
+    | (Document<unknown, any, IService> & IService & Required<{ _id: string | Types.ObjectId }> & ServiceMethods)
+    | (Document<unknown, any, IServiceTemplate> & IServiceTemplate & Required<{ _id: string | Types.ObjectId }> & ServiceTemplateMethods);
+
+function addArray(array: any[], arrayElement: Type, document: Type, opts = { fullElement: false }) {
+    if (!arrayElement || !arrayElement._id) throw { success: false, message: 'Invalid ' + document.collection.collectionName };
     if (!Array.isArray(array)) array = [];
 
     if (!opts.fullElement && array.some((elem) => ModelUtils.isEq(elem, arrayElement._id)))
-        throw { success: false, message: 'Cannot add ' + arrayElement.constructor().modelName + ' to ' + document.constructor().modelName + '. Already exist' };
+        throw { success: false, message: 'Cannot add ' + arrayElement.collection.collectionName + ' to ' + document.collection.collectionName + '. Already exist' };
     if (array.length === 0) array.push(opts.fullElement ? arrayElement : arrayElement._id);
     else array[array.length] = opts.fullElement ? arrayElement : arrayElement._id;
 }

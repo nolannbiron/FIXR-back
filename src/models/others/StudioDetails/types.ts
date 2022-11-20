@@ -1,8 +1,9 @@
 import { Model } from 'mongoose';
+import { IDetails } from '../Details/types';
 
 export interface IStudioDetails {
-    rules: string[];
-    extras: string[];
+    rules: IDetails[];
+    extras: IDetails[];
 }
 
 export type StudioDetails = Omit<IStudioDetails, '_id'> & { _id?: string };

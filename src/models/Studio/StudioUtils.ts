@@ -18,12 +18,7 @@ export async function filterStudios(req: Request) {
 export default function (StudioSchema: Schema<IStudio, StudioModel>) {
     StudioSchema.methods.generateJSON = async function (req: Request) {
         const studio = this;
-
-        console.log({ studio });
-
-        const ret = await studio.generateJSON_(req);
-        console.log({ ret });
-        return ret;
+        return await studio.generateJSON_(req);
     };
 
     StudioSchema.statics.generateToken = async function (id: string, admin = false) {
